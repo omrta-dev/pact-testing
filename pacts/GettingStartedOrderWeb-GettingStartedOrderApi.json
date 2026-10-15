@@ -1,0 +1,82 @@
+{
+  "consumer": {
+    "name": "GettingStartedOrderWeb"
+  },
+  "interactions": [
+    {
+      "description": "a request for orders",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "there are orders"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/orders"
+      },
+      "response": {
+        "body": {
+          "content": [
+            {
+              "id": 1,
+              "items": [
+                {
+                  "name": "burger",
+                  "quantity": 2,
+                  "value": 100
+                }
+              ]
+            }
+          ],
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$[*].items": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "16.3.0"
+    },
+    "pactRust": {
+      "ffi": "0.5.3",
+      "models": "1.3.9"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "GettingStartedOrderApi"
+  }
+}
